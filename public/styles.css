@@ -1,7 +1,148 @@
 body{
     margin: 0;
     padding: 0;
-    /* font-family: 'Outfit', sans-serif;
-    font-family: 'Oswald', sans-serif;
+    font-size:16px;
+    font-family: 'Outfit', sans-serif; 
+    /* font-family: 'Oswald', sans-serif;
     font-family: 'Outfit', sans-serif; */
+}
+.container{
+    max-width: 60%;
+    margin-top: 50px;
+    margin-left: 200px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows:minmax(120px, auto);
+    gap: 15px;
+}
+.book-icon{
+    grid-column: 1/4;
+    display: flex;
+    justify-content: start;
+    align-items:start;
+}
+.book-icon .material-symbols-outlined {
+    font-size: 120px;
+    opacity: 50%;
+    color: green;
+}
+.book-icon #dictionary{
+    position: relative;
+    left: 30px;
+    font-size: 50px;
+    color: grey
+}
+.book-icon #author{
+    position:absolute;
+    top: 135px;
+    left: 450px;
+    opacity: 70%;
+    font-size: 14px;
+    border: 2px green solid;
+    padding: 5px;
+    border-radius: 28px;
+    text-decoration: underline;
+}
+#fonts{
+    padding:0;
+    font-size: 14px;
+    grid-column: 4/5;
+    width: 70px;
+    height: 40px;
+    border: none;
+    display: flex;
+    justify-self: end;
+    align-self:start;
+}
+.right-panel .material-symbols-outlined{
+    font-size: 20px;
+    margin-top: 15px;
+    color: #777
+}
+form{
+    grid-column: 1/-1;
+    grid-row: 2;
+}
+form #search{
+    height: 2.5em;
+    width: 100%;
+    padding: 0 10px;
+}
+.word{
+    grid-row: 3;
+    grid-column: 1 / 5;
+    font-size: 5em;
+}
+.word .transcript{
+    color:blueviolet;
+    opacity: 80%;
+    font-size: 0.5em;
+}
+.audio .material-symbols-outlined{
+    font-size: 80px;
+    color: blueviolet;
+}
+.noun{
+    grid-row:4;
+    grid-column: 1/-1;
+    font-weight: bold;
+}
+.border{
+    border-bottom: 3px solid #bbb;
+}
+.noun-meaning{
+    grid-row: 5;
+    grid-column: 1/-1;
+    font-size: 20px;
+}
+.noun-meaning >*{
+    font-size: 14px;
+}
+.sinonym{
+    grid-row:6
+}
+.verb{
+    grid-row: 7;
+    grid-column: 1/-1;
+    font-weight: bold;
+}
+.verb-meaning >*{
+    font-size: 14px;
+    font-weight: normal;
+}
+.source{
+    grid-row: 8;
+    grid-column: 1/-1;
+}
+/* pseudoobject bullet color of ul elements */
+ul{
+    list-style: none;
+}
+ul li::before {
+    content: "\2022";
+    color: blueviolet;
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+/* pseudoclasses */
+.book-icon .material-symbols-outlined:hover{
+    cursor: pointer;
+}
+.book-icon #author:hover{
+    cursor:pointer;
+}
+.right-panel .material-symbols-outlined:hover{
+    cursor: pointer;
+}
+.audio .material-symbols-outlined:hover{
+    cursor:pointer;
+}
+.source a{
+    cursor: pointer;
+}
+.source span:hover{
+    cursor: pointer;
+    font-size: 2.5em;
 }
