@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-size:16px;
+    color:darkviolet;
     background-image: linear-gradient(#FED8B1, yellow);
     font-family: 'Montserrat', sans-serif; 
     /* font-family: 'Oswald', sans-serif;
@@ -33,7 +34,7 @@ body{
 }
 .book-icon .material-symbols-outlined {
     font-size: 120px;
-    color: orangered;
+    /* color: orangered; */
 }
 .book-icon span{
     text-decoration: none;
@@ -50,7 +51,7 @@ body{
     margin-top: 5px;
 }
 #right-panel >*{
-    color: orangered;
+    /* color: orangered; */
     
 }
 .on{
@@ -59,26 +60,14 @@ body{
 .off{
     display: none !important;
 }
-/* #toggle_on{
-    display: none;
-}
-#toggle_off{
-    display: none;
-}
-#light_mode{
-    display:inline-block;
-}
-#dark_mode{
-    display:inline-block;
-} */
 .book-icon span #dictionary{
     margin-left: 10px;
     margin-top: -5px;
     font-size: 60px;
-    color: orangered;
+    /* color: orangered; */
 }
 .book-icon span #author{
-    color:orangered;
+    /* color:orangered; */
     margin-top: 5px;
     align-self: center;
     width:40%;
@@ -91,6 +80,7 @@ body{
     text-decoration: underline;
 }
 #fonts{
+    color:darkviolet;
     padding:0;
     margin-top: 5px;
     font-size: 14px;
@@ -101,7 +91,7 @@ body{
     justify-self: end;
     align-self:start;
     background: rgba(0,0,0,0);
-    color:orangered;
+    /* color:orangered; */
     border-color: rgba(0,0,0,0);
     text-align:center;
     outline: none;
@@ -109,7 +99,7 @@ body{
 .right-panel .material-symbols-outlined{
     font-size: 30px;
     margin-top: 5px;
-    color: orangered;
+    /* color: orangered; */
 }
 form{
     grid-column: 1/-1;
@@ -122,6 +112,8 @@ form #search{
     outline-color: orangered;
     border: 2px orangered solid;
     border-radius: 28px;
+    background: rgba(0,0,0,0.2);
+    color: white;
 }
 .word{
     grid-row: 3;
@@ -130,7 +122,7 @@ form #search{
     letter-spacing: 0.2em;
 }
 .word .transcript{
-    color:orangered;
+    /* color:orangered; */
     font-size: 0.5em;
 }
 .audio .material-symbols-outlined{

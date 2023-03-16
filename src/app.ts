@@ -20,12 +20,5 @@ rightPanel.addEventListener('click', () =>{
         moon.classList.add('off')
         toggleOn.classList.add('off')
         toggleOff.classList.remove('off')
-        
-
-        
-        
     }
-    }
-    
-    
-)
+    })
