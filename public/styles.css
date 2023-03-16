@@ -2,62 +2,81 @@ body{
     margin: 0;
     padding: 0;
     font-size:16px;
-    font-family: 'Outfit', sans-serif; 
+    background-image: linear-gradient(#FED8B1, yellow);
+    font-family: 'Montserrat', sans-serif; 
     /* font-family: 'Oswald', sans-serif;
     font-family: 'Outfit', sans-serif; */
 }
 .container{
-    max-width: 60%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    max-width: 1080px;
     margin-top: 50px;
-    margin-left: 200px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    /* grid-template-columns: repeat(5, 1fr); */
+    grid-template-columns: repeat(5, auto);
     grid-auto-rows:minmax(120px, auto);
     gap: 15px;
 }
 .book-icon{
     grid-column: 1/4;
     display: flex;
-    justify-content: start;
+    /* flex-direction: column; */
+    justify-content: end;
     align-items:start;
 }
 .book-icon .material-symbols-outlined {
     font-size: 120px;
-    opacity: 50%;
-    color: green;
+    color: orangered;
 }
-.book-icon #dictionary{
-    position: relative;
-    left: 30px;
-    font-size: 50px;
-    color: grey
+.book-icon span{
+    text-decoration: none;
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
 }
-.book-icon #author{
-    position:absolute;
-    top: 135px;
-    left: 450px;
-    opacity: 70%;
+.book-icon span #dictionary{
+    margin-left: 10px;
+    margin-top: -5px;
+    font-size: 60px;
+    color: orangered;
+}
+.book-icon span #author{
+    margin-top: 5px;
+    align-self: center;
+    width:40%;
+    font-family: 'Cedarville Cursive', cursive;
     font-size: 14px;
-    border: 2px green solid;
+    border: 2px orangered solid;
     padding: 5px;
     border-radius: 28px;
     text-decoration: underline;
 }
 #fonts{
     padding:0;
+    margin-top: 5px;
     font-size: 14px;
     grid-column: 4/5;
-    width: 70px;
-    height: 40px;
+    width: 120px;
+    height: 30px;
     border: none;
     display: flex;
     justify-self: end;
     align-self:start;
+    border: 2px #f5f5dc solid;
+    border-radius: 28px;
+    text-decoration: none;
+    background: #F5F5DC;
+    color:orangered;
+    text-align:center;
+    outline-color: #F5F5DC;
 }
 .right-panel .material-symbols-outlined{
-    font-size: 20px;
-    margin-top: 15px;
-    color: #777
+    font-size: 30px;
+    margin-top: 5px;
+    color: orangered;
 }
 form{
     grid-column: 1/-1;
@@ -67,11 +86,15 @@ form #search{
     height: 2.5em;
     width: 100%;
     padding: 0 10px;
+    outline-color: orangered;
+    border: 2px orangered solid;
+    border-radius: 28px;
 }
 .word{
     grid-row: 3;
     grid-column: 1 / 5;
     font-size: 5em;
+    letter-spacing: 0.2em;
 }
 .word .transcript{
     color:blueviolet;
@@ -88,15 +111,17 @@ form #search{
     font-weight: bold;
 }
 .border{
-    border-bottom: 3px solid #bbb;
+    border-bottom: 3px solid orangered;
 }
 .noun-meaning{
     grid-row: 5;
     grid-column: 1/-1;
-    font-size: 20px;
+    font-weight: bolder;
+    font-size: 3em;
 }
 .noun-meaning >*{
     font-size: 14px;
+    font-weight: normal;
 }
 .sinonym{
     grid-row:6
@@ -104,7 +129,7 @@ form #search{
 .verb{
     grid-row: 7;
     grid-column: 1/-1;
-    font-weight: bold;
+    font-weight: bolder;
 }
 .verb-meaning >*{
     font-size: 14px;
@@ -130,8 +155,14 @@ ul li::before {
 .book-icon .material-symbols-outlined:hover{
     cursor: pointer;
 }
-.book-icon #author:hover{
+.book-icon span #author:hover{
     cursor:pointer;
+}
+#author:link{
+    text-decoration: none;
+}
+#author:visited{
+    text-decoration: none;
 }
 .right-panel .material-symbols-outlined:hover{
     cursor: pointer;
