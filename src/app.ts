@@ -7,7 +7,13 @@ const sun = document.querySelector("#light_mode") as HTMLSpanElement;
 const search = document.querySelector('#search') as HTMLInputElement;
 const fonts = document.querySelector("#fonts") as HTMLSelectElement;
 const boldWord = document.querySelector(".bold") as HTMLDivElement;
+const transcript = document.querySelector(".transcript") as HTMLDivElement;
 const form = document.querySelector('form') as HTMLFormElement;
+const firstNounLi = document.querySelector('#first') as HTMLLIElement;
+const secondNounLi = document.querySelector('#second') as HTMLLIElement;
+const thirdNounLi = document.querySelector('#third') as HTMLLIElement;
+const source = document.querySelector(".source a") as HTMLAnchorElement;
+
 
 // light/dark theme
 rightPanel.addEventListener('click', () =>{
@@ -53,3 +59,56 @@ fonts.addEventListener("change", ()=>{
         break
     }
 })
+
+
+// Async function class and interface 
+interface ForDictionary{
+    URL: string;
+    word: string;
+    getWord(word:string):any;
+    updateUI(word:string):void;
+}
+class Dictionary implements ForDictionary{
+    URL:string
+    word:string;
+    constructor(message:string){
+        this.URL = `https://api.dictionaryapi.dev/api/v2/entries/en/`
+        this.word = message;
+    }
+    async getWord(word:string){
+        const response = await fetch(`${this.URL}${this.word}`)
+        const data = await response.json()
+        return data
+        console.log(data)
+    }
+    async updateUI(word:string){
+        const response = await this.getWord(word)
+        boldWord.innerText = response[0].word
+        transcript.innerText = response[0].phonetic
+        firstNounLi.innerText = response[0].meanings[0].definitions[0].definition
+        secondNounLi.innerText = response[0].meanings[0].definitions[1].definition
+        thirdNounLi.innerText = response[0].meanings[0].definitions[2].definition
+        source.innerText = response[0].sourceUrls[0]
+        source.setAttribute('href', source.innerText) 
+    }
+}
+
+form.addEventListener("submit", e =>{
+    e.preventDefault();
+    const searchedWord = search.value.trim();
+    const dynamicUI = new Dictionary(searchedWord);
+    dynamicUI.updateUI(searchedWord)
+    console.log(dynamicUI.getWord(searchedWord ))
+})
+
+
+
+
+// async function hello(){
+//     const response = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/hello")
+//     const data = await response.json()
+//     return data
+//     console.log(data)
+// }
+
+// hello().then(data => console.log(data))
