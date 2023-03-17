@@ -4,9 +4,7 @@ body{
     font-size:16px;
     color:darkviolet;
     background-image: linear-gradient(#FED8B1, yellow);
-    font-family: 'Montserrat', sans-serif; 
-    /* font-family: 'Oswald', sans-serif;
-    font-family: 'Outfit', sans-serif; */
+    font-family: 'Oswald', sans-serif; 
 }
 .dark-theme{
     background-image: linear-gradient(black, darkviolet);
@@ -49,10 +47,6 @@ body{
     border: 1px rgba(0,0,0,0) solid;
     border-radius: 28px;
     margin-top: 5px;
-}
-#right-panel >*{
-    /* color: orangered; */
-    
 }
 .on{
     display:inline-block !important;
@@ -112,16 +106,17 @@ form #search{
     outline-color: orangered;
     border: 2px orangered solid;
     border-radius: 28px;
-    background: rgba(0,0,0,0.2);
-    color: white;
+    background: rgba(0,0,0,0.1);
+    color:black;
+    font-weight:bold;
 }
-.word{
+.bold{
     grid-row: 3;
     grid-column: 1 / 5;
     font-size: 5em;
     letter-spacing: 0.2em;
 }
-.word .transcript{
+.bold .transcript{
     /* color:orangered; */
     font-size: 0.5em;
 }
@@ -194,4 +189,7 @@ ul li::before {
 .source span:hover{
     cursor: pointer;
     font-size: 2.5em;
+}
+form #search:focus{
+    outline:none;
 }
