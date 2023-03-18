@@ -1,10 +1,10 @@
 body{
-    height: 900px;
+    height:auto;
     margin: 0;
     padding: 0;
     font-size:16px;
     color:darkviolet;
-    background-image: linear-gradient(#FED8B1, yellow);
+    background-image: linear-gradient(to right,#FED8B1, yellow);
     font-family: 'Oswald', sans-serif; 
 }
 .dark-theme{
@@ -12,34 +12,23 @@ body{
     color: orangered;
 }
 .container{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    width: 90%;
-    max-width: 1080px;
     margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;;
     display: grid;
-    /* grid-template-columns: repeat(5, 1fr); */
-    grid-template-columns: repeat(5, auto);
-    grid-auto-rows:minmax(120px, auto);
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(120px, auto);
     gap: 15px;
 }
 .book-icon{
     grid-column: 1/4;
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: end;
-    align-items:start;
 }
 .book-icon .material-symbols-outlined {
     font-size: 120px;
-    /* color: orangered; */
 }
 .book-icon span{
     text-decoration: none;
     display: inline-block;
-    display: flex;
-    flex-direction: column;
 }
 #right-panel{
     text-align: center;
@@ -59,15 +48,9 @@ body{
     margin-left: 10px;
     margin-top: -5px;
     font-size: 60px;
-    /* color: orangered; */
 }
 .book-icon span #author{
-    /* color:orangered; */
-    margin-top: 5px;
-    align-self: center;
-    width:40%;
     font-family:fantasy;
-    /* font-family: 'Cedarville Cursive', cursive; */
     font-size: 14px;
     border: 2px rgba(0,0,0,0) solid;
     padding: 5px;
@@ -82,11 +65,7 @@ body{
     grid-column: 4/5;
     width: 80px;
     height: 30px;
-    display: flex;
-    justify-self: end;
-    align-self:start;
     background: rgba(0,0,0,0);
-    /* color:orangered; */
     border-color: rgba(0,0,0,0);
     text-align:center;
     outline: none;
@@ -94,7 +73,6 @@ body{
 .right-panel .material-symbols-outlined{
     font-size: 30px;
     margin-top: 5px;
-    /* color: orangered; */
 }
 form{
     grid-column: 1/-1;
@@ -113,7 +91,7 @@ form #search{
 }
 .wrapper{
     grid-row: 3;
-    grid-column: 1 / 5;
+    grid-column: 1 / 4;
     
 }
 .bold{
@@ -121,8 +99,11 @@ form #search{
     letter-spacing: 0.2em;
 }
 .wrapper .transcript{
-    /* color:orangered; */
     font-size: 2em;
+}
+.audio{
+    grid-column: 4/ -1;
+    grid-row:3
 }
 .audio .material-symbols-outlined{
     font-size: 80px;
@@ -151,21 +132,6 @@ form #search{
     font-size: 0.8;
     font-weight: normal;
 }
-/* .sinonym{
-    grid-row:6
-} */
-/* .verb{
-    grid-row: 6;
-    grid-column: 1/-1;
-    font-weight: bolder;
-} */
-/* .verb-meaning{
-    font-size: 3em;
-}
-.verb-meaning >*{
-    font-size: 14px;
-    font-weight: normal;
-} */
 .source{
     grid-row: 6;
     grid-column: 1/-1;
