@@ -17,12 +17,18 @@ const sun = document.querySelector("#light_mode");
 const search = document.querySelector('#search');
 const fonts = document.querySelector("#fonts");
 const boldWord = document.querySelector(".bold");
+const nounMeaning = document.querySelector(".noun-meaning");
+const noun = document.querySelector(".noun");
+const wrapper = document.querySelector(".wrapper");
+const audio = document.querySelector(".audio");
 const transcript = document.querySelector(".transcript");
 const form = document.querySelector('form');
 const firstNounLi = document.querySelector('#first');
 const secondNounLi = document.querySelector('#second');
 const thirdNounLi = document.querySelector('#third');
-const source = document.querySelector(".source a");
+const source = document.querySelector(".source #link");
+const linkArrow = document.querySelector('.source #pic');
+const lastDiv = document.querySelector(".source");
 // light/dark theme
 rightPanel.addEventListener('click', () => {
     body.classList.toggle("dark-theme");
@@ -33,6 +39,11 @@ rightPanel.addEventListener('click', () => {
         toggleOff.classList.add('off');
         toggleOn.classList.remove('off');
         search.style.color = 'white';
+        fonts.style.color = "orangered";
+        source.style.color = "orangered";
+        linkArrow.style.color = "orangered";
+        search.style.borderColor = "orangered";
+        search.style.outlineColor = "orangered";
     }
     else {
         sun.classList.add('on');
@@ -41,6 +52,11 @@ rightPanel.addEventListener('click', () => {
         toggleOn.classList.add('off');
         toggleOff.classList.remove('off');
         search.style.color = 'black';
+        fonts.style.color = "darkviolet";
+        source.style.color = "darkviolet";
+        linkArrow.style.color = "darkviolet";
+        search.style.borderColor = "darkviolet";
+        search.style.outlineColor = "darkviolet";
     }
 });
 // fonts switch
@@ -82,12 +98,21 @@ class Dictionary {
     updateUI(word) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.getWord(word);
+            // API requests
             boldWord.innerText = response[0].word;
             transcript.innerText = response[0].phonetic;
             firstNounLi.innerText = response[0].meanings[0].definitions[0].definition;
             secondNounLi.innerText = response[0].meanings[0].definitions[1].definition;
             thirdNounLi.innerText = response[0].meanings[0].definitions[2].definition;
             source.innerText = response[0].sourceUrls[0];
+            source.href = source.innerText;
+            linkArrow.href = source.innerText;
+            // visible UI
+            wrapper.classList.remove("off");
+            audio.classList.remove("off");
+            noun.classList.remove("off");
+            nounMeaning.classList.remove('off');
+            lastDiv.classList.remove('off');
         });
     }
 }

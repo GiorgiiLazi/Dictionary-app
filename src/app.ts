@@ -7,12 +7,18 @@ const sun = document.querySelector("#light_mode") as HTMLSpanElement;
 const search = document.querySelector('#search') as HTMLInputElement;
 const fonts = document.querySelector("#fonts") as HTMLSelectElement;
 const boldWord = document.querySelector(".bold") as HTMLDivElement;
+const nounMeaning = document.querySelector(".noun-meaning") as HTMLDivElement;
+const noun = document.querySelector(".noun") as HTMLDivElement;
+const wrapper = document.querySelector(".wrapper") as HTMLDivElement;
+const audio = document.querySelector(".audio") as HTMLDivElement;
 const transcript = document.querySelector(".transcript") as HTMLDivElement;
 const form = document.querySelector('form') as HTMLFormElement;
 const firstNounLi = document.querySelector('#first') as HTMLLIElement;
 const secondNounLi = document.querySelector('#second') as HTMLLIElement;
 const thirdNounLi = document.querySelector('#third') as HTMLLIElement;
-const source = document.querySelector(".source a") as HTMLAnchorElement;
+const source = document.querySelector(".source #link") as HTMLAnchorElement;
+const linkArrow = document.querySelector('.source #pic') as HTMLAnchorElement;
+const lastDiv = document.querySelector(".source") as HTMLDivElement;
 
 
 // light/dark theme
@@ -25,6 +31,11 @@ rightPanel.addEventListener('click', () =>{
         toggleOff.classList.add('off')
         toggleOn.classList.remove('off')
         search.style.color = 'white';
+        fonts.style.color = "orangered"
+        source.style.color = "orangered"
+        linkArrow.style.color = "orangered"
+        search.style.borderColor = "orangered"
+        search.style.outlineColor = "orangered"
     }
     else{
         sun.classList.add('on')
@@ -33,6 +44,11 @@ rightPanel.addEventListener('click', () =>{
         toggleOn.classList.add('off')
         toggleOff.classList.remove('off')
         search.style.color = 'black';
+        fonts.style.color = "darkviolet"
+        source.style.color = "darkviolet"
+        linkArrow.style.color = "darkviolet"
+        search.style.borderColor = "darkviolet"
+        search.style.outlineColor = "darkviolet"
     }
 });
 
@@ -83,13 +99,22 @@ class Dictionary implements ForDictionary{
     }
     async updateUI(word:string){
         const response = await this.getWord(word)
+        // API requests
         boldWord.innerText = response[0].word
         transcript.innerText = response[0].phonetic
         firstNounLi.innerText = response[0].meanings[0].definitions[0].definition
         secondNounLi.innerText = response[0].meanings[0].definitions[1].definition
         thirdNounLi.innerText = response[0].meanings[0].definitions[2].definition
         source.innerText = response[0].sourceUrls[0]
-        source.setAttribute('href', source.innerText) 
+        source.href = source.innerText
+        linkArrow.href = source.innerText
+        // visible UI
+        wrapper.classList.remove("off")
+        audio.classList.remove("off")
+        noun.classList.remove("off")
+        nounMeaning.classList.remove('off')
+        lastDiv.classList.remove('off')
+
     }
 }
 
@@ -98,7 +123,7 @@ form.addEventListener("submit", e =>{
     const searchedWord = search.value.trim();
     const dynamicUI = new Dictionary(searchedWord);
     dynamicUI.updateUI(searchedWord)
-    console.log(dynamicUI.getWord(searchedWord ))
+    console.log(dynamicUI.getWord(searchedWord))
 })
 
 
