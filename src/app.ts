@@ -19,6 +19,7 @@ const thirdNounLi = document.querySelector('#third') as HTMLLIElement;
 const source = document.querySelector(".source #link") as HTMLAnchorElement;
 const linkArrow = document.querySelector('.source #pic') as HTMLAnchorElement;
 const lastDiv = document.querySelector(".source") as HTMLDivElement;
+const author = document.querySelector('#author') as HTMLAnchorElement;
 
 
 // light/dark theme
@@ -34,8 +35,10 @@ rightPanel.addEventListener('click', () =>{
         fonts.style.color = "orangered"
         source.style.color = "orangered"
         linkArrow.style.color = "orangered"
+        author.style.color = "orangered"
         search.style.borderColor = "orangered"
         search.style.outlineColor = "orangered"
+        
     }
     else{
         sun.classList.add('on')
@@ -47,8 +50,10 @@ rightPanel.addEventListener('click', () =>{
         fonts.style.color = "darkviolet"
         source.style.color = "darkviolet"
         linkArrow.style.color = "darkviolet"
+        author.style.color = "darkviolet"
         search.style.borderColor = "darkviolet"
         search.style.outlineColor = "darkviolet"
+        
     }
 });
 

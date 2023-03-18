@@ -29,6 +29,7 @@ const thirdNounLi = document.querySelector('#third');
 const source = document.querySelector(".source #link");
 const linkArrow = document.querySelector('.source #pic');
 const lastDiv = document.querySelector(".source");
+const author = document.querySelector('#author');
 // light/dark theme
 rightPanel.addEventListener('click', () => {
     body.classList.toggle("dark-theme");
@@ -42,6 +43,7 @@ rightPanel.addEventListener('click', () => {
         fonts.style.color = "orangered";
         source.style.color = "orangered";
         linkArrow.style.color = "orangered";
+        author.style.color = "orangered";
         search.style.borderColor = "orangered";
         search.style.outlineColor = "orangered";
     }
@@ -55,6 +57,7 @@ rightPanel.addEventListener('click', () => {
         fonts.style.color = "darkviolet";
         source.style.color = "darkviolet";
         linkArrow.style.color = "darkviolet";
+        author.style.color = "darkviolet";
         search.style.borderColor = "darkviolet";
         search.style.outlineColor = "darkviolet";
     }
