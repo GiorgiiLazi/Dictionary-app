@@ -8,7 +8,7 @@ body{
     font-family: 'Oswald', sans-serif; 
 }
 .dark-theme{
-    background-image: linear-gradient(black, darkviolet);
+    background-image: linear-gradient(to right, #21002c, #290339, #310348, #3a0256, #420166, #4b016e, #540175, #5d007d, #68007e, #73007e, #7e007f, #88007f);
     color: orangered;
 }
 .container{
@@ -170,4 +170,74 @@ ul li::before {
 }
 form #search:focus{
     outline:none;
+}
+
+/* mobile devices look */
+@media only screen and (max-width:780px){
+    .container{
+        margin-top: 50px;
+        margin-left: 50px;
+        margin-right: 50px;;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(60px, auto);
+        gap: 15px;
+    }
+    .book-icon{
+        grid-column: 1/-1;
+        grid-row: 1
+    }
+    #fonts{
+        color:darkviolet;
+        padding:0;
+        margin-top: 5px;
+        font-size: 14px;
+        grid-column: 1;
+        grid-row: 2;
+        width: 80px;
+        height: 30px;
+        background: rgba(0,0,0,0);
+        border-color: rgba(0,0,0,0);
+        text-align:center;
+        outline: none;
+    }
+    .right-panel{
+        grid-column: 2;
+        grid-row: 2;
+    }
+    form{
+        grid-column: 1/-1;
+        grid-row: 3;
+    }
+    form #search{
+        height: 2.5em;
+        width: 80%;
+        padding: 0 10px;
+        outline-color: darkviolet;
+        border: 2px darkviolet solid;
+        border-radius: 28px;
+        background: rgba(0,0,0,0.1);
+        color:black;
+        font-weight:bold;
+    }
+    .wrapper{
+        grid-row: 4;
+        grid-column: 1 / -1;
+    }
+    .audio{
+        grid-column: 1/ -1;
+        grid-row:5;
+    }
+    .noun{
+        grid-row:6;
+        grid-column: 1/-1;
+    }
+    .noun-meaning{
+        grid-row: 7;
+        grid-column: 1/-1;
+    }
+    .source{
+        grid-row: 8;
+        grid-column: 1/-1;
+    }
 }
