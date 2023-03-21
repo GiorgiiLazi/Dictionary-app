@@ -10,7 +10,9 @@ const boldWord = document.querySelector(".bold") as HTMLDivElement;
 const nounMeaning = document.querySelector(".noun-meaning") as HTMLDivElement;
 const noun = document.querySelector(".noun") as HTMLDivElement;
 const wrapper = document.querySelector(".wrapper") as HTMLDivElement;
-const audio = document.querySelector(".audio") as HTMLDivElement;
+const audioPlayer = document.querySelector(".audio") as HTMLDivElement;
+const audioPlayerElements = document.querySelector(".audio span") as HTMLSpanElement;
+const playBtn = document.querySelector(".play") as HTMLSpanElement;
 const transcript = document.querySelector(".transcript") as HTMLDivElement;
 const form = document.querySelector('form') as HTMLFormElement;
 const firstNounLi = document.querySelector('#first') as HTMLLIElement;
@@ -21,8 +23,11 @@ const linkArrow = document.querySelector('.source #pic') as HTMLAnchorElement;
 const lastDiv = document.querySelector(".source") as HTMLDivElement;
 const author = document.querySelector('#author') as HTMLAnchorElement;
 
+// audio context
+let audioContext:AudioContext
+let samples:Array<AudioBuffer>;
 
-// light/dark theme
+// light/dark theme switch
 rightPanel.addEventListener('click', () =>{
     body.classList.toggle("dark-theme");
     if(body.classList.contains("dark-theme")){
@@ -81,13 +86,14 @@ fonts.addEventListener("change", ()=>{
     }
 })
 
-
 // Async function class and interface 
 interface ForDictionary{
     URL: string;
     word: string;
-    getWord(word:string):any;
-    updateUI(word:string):void;
+    getWord(word:string):Promise<unknown>;
+    updateUI(word:string):Promise<void>;
+    getAudioFile(filepath:string):Promise<AudioBuffer>;
+    setupSamples(paths:string):Promise<AudioBuffer[]>
 }
 class Dictionary implements ForDictionary{
     URL:string
@@ -100,7 +106,7 @@ class Dictionary implements ForDictionary{
         const response = await fetch(`${this.URL}${this.word}`)
         const data = await response.json()
         return data
-        console.log(data)
+        // console.log(data)
     }
     async updateUI(word:string){
         const response = await this.getWord(word)
@@ -115,30 +121,60 @@ class Dictionary implements ForDictionary{
         linkArrow.href = source.innerText
         // visible UI
         wrapper.classList.remove("off")
-        audio.classList.remove("off")
+        audioPlayer.classList.remove("off")
         noun.classList.remove("off")
         nounMeaning.classList.remove('off')
         lastDiv.classList.remove('off')
-
+        // remove previous event listeners
+        // playBtn.removeEventListener('click', playSample())
+        playBtn.removeEventListener("click", noAudio)
+        // Audio API paths management
+        const samplePath:string = await response[0].phonetics[0].audio
+        if(samplePath == ""){
+            playBtn.addEventListener("click", noAudio)
+        }else{
+            const audioResponse = await this.setupSamples(samplePath)
+            .then(response => {
+                samples = response
+                // console.log(samplePath)
+                playBtn.addEventListener("click", () =>{
+                    playSample(samples[0], 0)
+                })
+            })
+        }
+    }
+    async getAudioFile(filepath:string):Promise<AudioBuffer>{
+        audioContext = new AudioContext()
+        const response = await fetch(filepath);
+        const arrayBuffer = await response.arrayBuffer()
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
+        return audioBuffer
+    }
+    async setupSamples(path:string):Promise<AudioBuffer[]>{
+        console.log("setting up sample")
+        const audioBuffers = []
+        const sample = await this.getAudioFile(path)
+        audioBuffers.push(sample)
+        console.log("setting up sample done")
+        return audioBuffers
     }
 }
-
+// form event listener
 form.addEventListener("submit", e =>{
     e.preventDefault();
-    const searchedWord = search.value.trim();
+    const searchedWord = search.value.trim().toLowerCase();
     const dynamicUI = new Dictionary(searchedWord);
     dynamicUI.updateUI(searchedWord)
     console.log(dynamicUI.getWord(searchedWord))
 })
+// functions for Audio Player
+function playSample(audioBuffer:AudioBuffer, time:any){
+    const sampleSrc = audioContext.createBufferSource()
+    sampleSrc.buffer = audioBuffer;
+    sampleSrc.connect(audioContext.destination)
+    sampleSrc.start(time) 
+}
 
-
-
-
-// async function hello(){
-//     const response = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/hello")
-//     const data = await response.json()
-//     return data
-//     console.log(data)
-// }
-
-// hello().then(data => console.log(data))
+function noAudio(){
+    alert("Sorry, this word was not provided with audio sample by database")
+}

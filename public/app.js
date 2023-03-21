@@ -20,7 +20,9 @@ const boldWord = document.querySelector(".bold");
 const nounMeaning = document.querySelector(".noun-meaning");
 const noun = document.querySelector(".noun");
 const wrapper = document.querySelector(".wrapper");
-const audio = document.querySelector(".audio");
+const audioPlayer = document.querySelector(".audio");
+const audioPlayerElements = document.querySelector(".audio span");
+const playBtn = document.querySelector(".play");
 const transcript = document.querySelector(".transcript");
 const form = document.querySelector('form');
 const firstNounLi = document.querySelector('#first');
@@ -30,7 +32,10 @@ const source = document.querySelector(".source #link");
 const linkArrow = document.querySelector('.source #pic');
 const lastDiv = document.querySelector(".source");
 const author = document.querySelector('#author');
-// light/dark theme
+// audio context
+let audioContext;
+let samples;
+// light/dark theme switch
 rightPanel.addEventListener('click', () => {
     body.classList.toggle("dark-theme");
     if (body.classList.contains("dark-theme")) {
@@ -95,7 +100,7 @@ class Dictionary {
             const response = yield fetch(`${this.URL}${this.word}`);
             const data = yield response.json();
             return data;
-            console.log(data);
+            // console.log(data)
         });
     }
     updateUI(word) {
@@ -112,24 +117,65 @@ class Dictionary {
             linkArrow.href = source.innerText;
             // visible UI
             wrapper.classList.remove("off");
-            audio.classList.remove("off");
+            audioPlayer.classList.remove("off");
             noun.classList.remove("off");
             nounMeaning.classList.remove('off');
             lastDiv.classList.remove('off');
+            // remove previous event listeners
+            // playBtn.removeEventListener('click', playSample())
+            playBtn.removeEventListener("click", noAudio);
+            // Audio API paths management
+            const samplePath = yield response[0].phonetics[0].audio;
+            if (samplePath == "") {
+                playBtn.addEventListener("click", noAudio);
+            }
+            else {
+                const audioResponse = yield this.setupSamples(samplePath)
+                    .then(response => {
+                    samples = response;
+                    // console.log(samplePath)
+                    playBtn.addEventListener("click", () => {
+                        playSample(samples[0], 0);
+                    });
+                });
+            }
+        });
+    }
+    getAudioFile(filepath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            audioContext = new AudioContext();
+            const response = yield fetch(filepath);
+            const arrayBuffer = yield response.arrayBuffer();
+            const audioBuffer = yield audioContext.decodeAudioData(arrayBuffer);
+            return audioBuffer;
+        });
+    }
+    setupSamples(path) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("setting up sample");
+            const audioBuffers = [];
+            const sample = yield this.getAudioFile(path);
+            audioBuffers.push(sample);
+            console.log("setting up sample done");
+            return audioBuffers;
         });
     }
 }
+// form event listener
 form.addEventListener("submit", e => {
     e.preventDefault();
-    const searchedWord = search.value.trim();
+    const searchedWord = search.value.trim().toLowerCase();
     const dynamicUI = new Dictionary(searchedWord);
     dynamicUI.updateUI(searchedWord);
     console.log(dynamicUI.getWord(searchedWord));
 });
-// async function hello(){
-//     const response = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/hello")
-//     const data = await response.json()
-//     return data
-//     console.log(data)
-// }
-// hello().then(data => console.log(data))
+// functions for Audio Player
+function playSample(audioBuffer, time) {
+    const sampleSrc = audioContext.createBufferSource();
+    sampleSrc.buffer = audioBuffer;
+    sampleSrc.connect(audioContext.destination);
+    sampleSrc.start(time);
+}
+function noAudio() {
+    alert("Sorry, this word was not provided with audio sample by database");
+}
