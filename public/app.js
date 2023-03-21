@@ -21,7 +21,7 @@ const nounMeaning = document.querySelector(".noun-meaning");
 const noun = document.querySelector(".noun");
 const wrapper = document.querySelector(".wrapper");
 const audioPlayer = document.querySelector(".audio");
-const audioPlayerElements = document.querySelector(".audio span");
+const audioPlayerElement = document.querySelector(".audio span");
 const playBtn = document.querySelector(".play");
 const transcript = document.querySelector(".transcript");
 const form = document.querySelector('form');
@@ -51,6 +51,7 @@ rightPanel.addEventListener('click', () => {
         author.style.color = "orangered";
         search.style.borderColor = "orangered";
         search.style.outlineColor = "orangered";
+        audioPlayerElement.style.color = "orangered";
     }
     else {
         sun.classList.add('on');
@@ -65,6 +66,7 @@ rightPanel.addEventListener('click', () => {
         author.style.color = "darkviolet";
         search.style.borderColor = "darkviolet";
         search.style.outlineColor = "darkviolet";
+        audioPlayerElement.style.color = "darkviolet";
     }
 });
 // fonts switch

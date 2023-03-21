@@ -11,7 +11,7 @@ const nounMeaning = document.querySelector(".noun-meaning") as HTMLDivElement;
 const noun = document.querySelector(".noun") as HTMLDivElement;
 const wrapper = document.querySelector(".wrapper") as HTMLDivElement;
 const audioPlayer = document.querySelector(".audio") as HTMLDivElement;
-const audioPlayerElements = document.querySelector(".audio span") as HTMLSpanElement;
+const audioPlayerElement = document.querySelector(".audio span") as HTMLSpanElement;
 const playBtn = document.querySelector(".play") as HTMLSpanElement;
 const transcript = document.querySelector(".transcript") as HTMLDivElement;
 const form = document.querySelector('form') as HTMLFormElement;
@@ -43,6 +43,7 @@ rightPanel.addEventListener('click', () =>{
         author.style.color = "orangered"
         search.style.borderColor = "orangered"
         search.style.outlineColor = "orangered"
+        audioPlayerElement.style.color = "orangered"
         
     }
     else{
@@ -58,6 +59,7 @@ rightPanel.addEventListener('click', () =>{
         author.style.color = "darkviolet"
         search.style.borderColor = "darkviolet"
         search.style.outlineColor = "darkviolet"
+        audioPlayerElement.style.color = "darkviolet"
         
     }
 });
